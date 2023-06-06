@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 RUN apt update \
         && apt install -y \
             g++ \
@@ -13,7 +13,10 @@ RUN apt update \
             opcache \
             pdo \
             pdo_pgsql \
-            pgsql
+            pgsql \
+        && a2enmod rewrite
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 

@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./src:/var/www/html
+      - ./default.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - "80:80"
     depends_on:
