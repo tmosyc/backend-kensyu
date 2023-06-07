@@ -2,3 +2,4 @@ memo.txt
 .env_file
 /docker/postgres/data/
 .idea/
+/src/vendor

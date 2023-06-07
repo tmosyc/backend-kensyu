@@ -16,12 +16,12 @@ class PostRepository
             new Post(
                 title: 'helloworld',
                 content: 'this is my first post',
-                auther: 'John Doe',
+                author: 'John Doe',
             ),
             new Post(
                 title: 'helloworld2',
                 content: 'this is my second post',
-                auther: 'John Doe',
+                author: 'John Doe',
             )
             ];
     }

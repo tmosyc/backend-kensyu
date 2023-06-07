@@ -19,7 +19,7 @@ class App
         $res = $handler->run($req);
 
         http_response_code($res['status_code']);
-        header('Content-Type: text/html; charset=utf-8');
+        header(header:'Content-Type: text/html; charset=utf-8');
         echo $res['body'];
     }
 }
