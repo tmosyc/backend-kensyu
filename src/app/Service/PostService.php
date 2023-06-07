@@ -7,10 +7,12 @@ use App\Repository\PostRepository;
 
 class PostService
 {
+    /**
+     * @return array
+     */
     public static function getPostList(): array
     {
         return PostRepository::getList();
     }
 }
 
-// ビジネスロジック。staticとは
