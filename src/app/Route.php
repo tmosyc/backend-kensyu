@@ -10,6 +10,11 @@ use App\Handler\NotFoundHandler;
 
 class Route
 {
+    /**
+     * @param string $method
+     * @param string $path
+     * @return HandlerInterface
+     */
     public static function getHandler(string $method, string $path): HandlerInterface
     {
         if ($method === 'GET' && $path === '/posts') {
