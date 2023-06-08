@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Model\Post;
+use PDO;
 
 class PostRepository
 {
@@ -12,19 +13,26 @@ class PostRepository
      */
     public static function getList(): array
     {
-        return [
-            new Post(
-                id:1,
-                title: 'helloworld',
-                content: 'this is my first post',
-                author: 'John Doe',
-            ),
-            new Post(
-                id:2,
-                title: 'helloworld2',
-                content: 'this is my second post',
-                author: 'John Doe',
-            )
-        ];
+        try {
+            $dbh = new PDO('pgsql:dbname=db;host=db','root', 'root');
+            $stmt = $dbh->query('SELECT * FROM article');
+            $posts=[];
+            while ($row=$stmt->fetch(PDO::FETCH_ASSOC)) {
+                $post = new Post(
+                    id: $row['article_id'],
+                    title: $row['title'],
+                    content: $row['text'],
+                    author: $row['user_id']
+                );
+                $posts[] = $post;
+            }
+
+            $dbh = null;
+        } catch (PDOException $e) {
+            print "エラー!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+
+        return $posts;
     }
 }
