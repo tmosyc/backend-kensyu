@@ -42,8 +42,6 @@ class GetPostListHandler implements HandlerInterface
             $id = (int) $id - 1;
             $id = (string) $id;
             $body .= "<a href=posts/{$id}>{$post->title}</a>";
-            $body .= "<p>{$post->content}</p>";
-            $body .= "<p>{$post->author}</p>";
         }
         $body .= "</body>";
 
