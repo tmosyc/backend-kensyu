@@ -15,4 +15,3 @@ class PostService
         return PostRepository::getList();
     }
 }
-
