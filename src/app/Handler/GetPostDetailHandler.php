@@ -24,10 +24,13 @@ class GetPostDetailHandler implements HandlerInterface
 
     private static function render($post): string
     {
+        $title=htmlspecialchars($post->title,ENT_QUOTES);
+        $content=htmlspecialchars($post->content,ENT_QUOTES);
+        $author_id=htmlspecialchars($post->author_id,ENT_QUOTES);
         $body = "<body>";
-        $body .="<h1>{$post->title}</h1>";
-        $body .="<p>{$post->content}</p>";
-        $body .="<p>{$post->author}</p>";
+        $body .="<h1>$title</h1>";
+        $body .="<p>$content</p>";
+        $body .="<p>$author_id</p>";
         $body .="</body>";
         return $body;
     }

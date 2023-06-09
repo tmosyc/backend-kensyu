@@ -8,13 +8,13 @@ class Post
      * @param int $id
      * @param string $title
      * @param string $content
-     * @param string $author
+     * @param int $author_id
      */
     public function __construct(
         public int $id,
         public string $title,
         public string $content,
-        public int $author,
+        public int $author_id,
     )
     {
     }

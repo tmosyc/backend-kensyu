@@ -15,14 +15,14 @@ class PostRepository
     public static function getList(): array
     {
         $dbh = DbConnect::dbConnect();
-        $stmt = $dbh->query('SELECT * FROM article');
+        $stmt = $dbh->query('SELECT article_id,title,text,user_id FROM article');
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $post = new Post(
                 id: $row['article_id'],
                 title: $row['title'],
                 content: $row['text'],
-                author: $row['user_id']
+                author_id: $row['user_id']
             );
             $posts[] = $post;
         }

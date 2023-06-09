@@ -23,7 +23,7 @@ class GetPostDetailRepository
             id: $results['article_id'],
             title: $results['title'],
             content: $results['text'],
-            author: $results['user_id'],
+            author_id: $results['user_id'],
         );
         $dbh = null;
 
