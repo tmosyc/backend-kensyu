@@ -8,7 +8,7 @@ use App\Handler\HandlerInterface;
 use App\Handler\GetPostListHandler;
 use App\Handler\GetPostDetailHandler;
 use App\Handler\NotFoundHandler;
-use App\Repository\InsertRepository;
+use App\Handler\PostArticleHandler;
 
 class Route
 {
@@ -27,9 +27,7 @@ class Route
             return  new GetPostDetailHandler($id);
         }
         if ($method === 'POST' && $path === "/posts") {
-            var_dump('post');
-            InsertRepository::InsertText($_POST['title'],$_POST['content']);
-            return new GetPostListHandler;
+            return new PostArticleHandler;
         }
 
 

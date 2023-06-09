@@ -1,14 +1,16 @@
 <?php
 
+
 declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Model\Post;
+use App\Model\Article;
 use App\Service\PostService;
 use App\Service\PostArticleService;
 
-class GetPostListHandler implements HandlerInterface
+
+class PostArticleHandler implements HandlerInterface
 {
     /**
      * @param array $req Request
@@ -17,6 +19,9 @@ class GetPostListHandler implements HandlerInterface
     public function run(array $req): array
     {
         $result = self::render(PostService::getPostList());
+
+        $article = new Article(title: $_POST['title'],content: $_POST['content']);
+        PostArticleService::ArticlePostList($article);
 
         return [
             "status_code" => 200,
@@ -38,9 +43,9 @@ class GetPostListHandler implements HandlerInterface
         $body .= "<button type='submit' name='content_post'>submit</button> ";
         $body .= "</form>";
         foreach ($posts as $post) {
-            $id = $post-> id;
-            $id = (int) $id - 1;
-            $id = (string) $id;
+            $id = $post->id;
+            $id = (int)$id - 1;
+            $id = (string)$id;
             $body .= "<a href=posts/{$id}>{$post->title}</a>";
             $body .= "<br>";
         }

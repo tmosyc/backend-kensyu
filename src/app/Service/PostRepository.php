@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Service;
 
 use App\Model\Post;
 use App\Repository\DbConnect;
@@ -33,4 +33,3 @@ class PostRepository
         return $posts;
     }
 }
-
