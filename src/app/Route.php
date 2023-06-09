@@ -29,8 +29,6 @@ class Route
         if ($method === 'POST' && $path === "/posts") {
             return new PostArticleHandler;
         }
-
-
         return new NotFoundHandler;
     }
 }

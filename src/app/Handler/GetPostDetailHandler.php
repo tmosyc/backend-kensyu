@@ -2,7 +2,7 @@
 namespace App\Handler;
 
 use App\Model\Post;
-use App\Service\PostService;
+use App\Service\GetPostDetailService;
 
 class GetPostDetailHandler implements HandlerInterface
 {
@@ -14,7 +14,7 @@ class GetPostDetailHandler implements HandlerInterface
 
     public function run(array $req): array
     {
-        $result = self::render(PostService::getPostList(), $this->id);
+        $result = self::render(GetPostDetailService::getPostArticleDetail($this->id));
 
         return [
             'status_code' => 200,
@@ -22,10 +22,8 @@ class GetPostDetailHandler implements HandlerInterface
         ];
     }
 
-    private static function render(array $posts, $id): string
+    private static function render($post): string
     {
-
-        $post = $posts[$id];
         $body = "<body>";
         $body .="<h1>{$post->title}</h1>";
         $body .="<p>{$post->content}</p>";

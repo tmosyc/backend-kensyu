@@ -43,10 +43,7 @@ class PostArticleHandler implements HandlerInterface
         $body .= "<button type='submit' name='content_post'>submit</button> ";
         $body .= "</form>";
         foreach ($posts as $post) {
-            $id = $post->id;
-            $id = (int)$id - 1;
-            $id = (string)$id;
-            $body .= "<a href=posts/{$id}>{$post->title}</a>";
+            $body .= "<a href=posts/{$post->id}>{$post->title}</a>";
             $body .= "<br>";
         }
         $body .= "</body>";

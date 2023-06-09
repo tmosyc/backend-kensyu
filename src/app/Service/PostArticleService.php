@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Service;
 use App\Repository\PostArticleRepository;
-use App\Model\Article;
 
 class PostArticleService
 {
@@ -12,6 +11,6 @@ class PostArticleService
      */
     public static function ArticlePostList($article)
     {
-        return PostArticleRepository::InsertArticle($article);
+        return PostArticleRepository::insertArticle($article);
     }
 }

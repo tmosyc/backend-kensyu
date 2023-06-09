@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Repository;
 
 use App\Model\Post;
-use App\Repository\DbConnect;
 use PDO;
 
 
