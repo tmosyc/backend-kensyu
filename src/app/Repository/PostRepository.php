@@ -16,17 +16,17 @@ class PostRepository
     {
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
-            $stmt = $pdo->query('SELECT article_id,title,text,user_id FROM article');
-            $posts = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $post = new Post(
-                    id: $row['article_id'],
-                    title: $row['title'],
-                    content: $row['text'],
-                    author_id: $row['user_id']
-                );
-                $posts[] = $post;
-            }
+        }
+        $stmt = $pdo->query('SELECT article_id,title,text,user_id FROM article');
+        $posts = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $post = new Post(
+                id: $row['article_id'],
+                title: $row['title'],
+                content: $row['text'],
+                author_id: $row['user_id']
+            );
+            $posts[] = $post;
         }
 
         $pdo = null;

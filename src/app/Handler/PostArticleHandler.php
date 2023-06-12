@@ -44,7 +44,6 @@ class PostArticleHandler implements HandlerInterface
         $body .= "</form>";
         foreach ($posts as $post) {
             $title = htmlspecialchars($post->title);
-            var_dump($title);
             $body .= "<a href=posts/$post->id>$title</a>";
             $body .= "<br>";
         }

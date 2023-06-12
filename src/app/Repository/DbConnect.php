@@ -11,9 +11,9 @@ class DbConnect
     public static function dbConnect()
     {
         try{
-        $pdo = new PDO('pgsql:dbname=db;host=db', $_ENV['POSTGRES_USER'], $_ENV['POSTGRES_PASSWORD']);
+            $pdo = new PDO('pgsql:dbname=db;host=db', $_ENV['POSTGRES_USER'], $_ENV['POSTGRES_PASSWORD']);
         } catch (PDOException $e) {
-            print "エラー!: " . $e->getMessage() . "<br/>";
+            print "pdoを取得できませんでした" . $e->getMessage() . "<br/>";
             die();
         }
         return $pdo;
