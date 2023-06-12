@@ -11,11 +11,11 @@ class DbConnect
     public static function dbConnect()
     {
         try{
-        $dbh = new PDO('pgsql:dbname=db;host=db', $_ENV['POSTGRES_USER'], $_ENV['POSTGRES_PASSWORD']);
+        $pdo = new PDO('pgsql:dbname=db;host=db', $_ENV['POSTGRES_USER'], $_ENV['POSTGRES_PASSWORD']);
         } catch (PDOException $e) {
             print "エラー!: " . $e->getMessage() . "<br/>";
             die();
         }
-        return $dbh;
+        return $pdo;
     }
 }
