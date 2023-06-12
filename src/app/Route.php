@@ -6,7 +6,9 @@ namespace App;
 
 use App\Handler\HandlerInterface;
 use App\Handler\GetPostListHandler;
+use App\Handler\GetPostDetailHandler;
 use App\Handler\NotFoundHandler;
+use App\Handler\PostArticleHandler;
 
 class Route
 {
@@ -15,12 +17,18 @@ class Route
      * @param string $path
      * @return HandlerInterface
      */
-    public static function getHandler(string $method, string $path): HandlerInterface
+    public static function getHandler(string $method, string $path,): HandlerInterface
     {
+        $id = explode('/', $path)[2];
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;
         }
-
+        if ($method === 'GET' && $path === "/posts/{$id}") {
+            return  new GetPostDetailHandler($id);
+        }
+        if ($method === 'POST' && $path === "/posts") {
+            return new PostArticleHandler;
+        }
         return new NotFoundHandler;
     }
 }

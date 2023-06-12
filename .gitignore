@@ -3,3 +3,4 @@ memo.txt
 /docker/postgres/data/
 .idea/
 /src/vendor
+/src/.env
