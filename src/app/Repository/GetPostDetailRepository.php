@@ -13,7 +13,6 @@ class GetPostDetailRepository
 {
     public static function selectArticleDetail($id, PDO $pdo = null)
     {
-        var_dump($id);
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
         }

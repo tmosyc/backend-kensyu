@@ -17,7 +17,7 @@ class PostRepository
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
         }
-        $stmt = $pdo->query('SELECT article_id,title,text,user_id FROM article');
+        $stmt = $pdo->query('SELECT article_id,title,text,user_id FROM article ORDER BY article_id');
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $post = new Post(

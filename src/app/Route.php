@@ -9,6 +9,7 @@ use App\Handler\GetPostListHandler;
 use App\Handler\GetPostDetailHandler;
 use App\Handler\NotFoundHandler;
 use App\Handler\PostArticleHandler;
+use App\Handler\PostUpdateArticleHandler;
 
 class Route
 {
@@ -26,8 +27,14 @@ class Route
         if ($method === 'GET' && $path === "/posts/{$id}") {
             return  new GetPostDetailHandler($id);
         }
+        if ($method === 'POST' && $path === "/posts/{$id}") {
+            return  new GetPostDetailHandler($id);
+        }
         if ($method === 'POST' && $path === "/posts") {
             return new PostArticleHandler;
+        }
+        if ($method === 'POST' && $path === "/posts/{$id}/update"){
+            return new PostUpdateArticleHandler($id);
         }
         return new NotFoundHandler;
     }
