@@ -22,7 +22,6 @@ class PostUpdateArticleRepository
         $stmt = $pdo->prepare('UPDATE article SET title = :title, text = :content WHERE article_id = :id');
         $params = array(':id'=>$updateArticle->id, ':title' => $updateArticle->title, ':content' => $updateArticle->content);
         $stmt->execute($params);
-        var_dump($stmt);
         $pdo = null;
     }
 }

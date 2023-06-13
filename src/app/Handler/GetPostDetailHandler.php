@@ -16,12 +16,12 @@ class GetPostDetailHandler implements HandlerInterface
 
     public function run(array $req): array
     {
-        $result = self::render(GetPostDetailService::getPostArticleDetail($this->id));
-
         if (isset($_POST["update_title"], $_POST['update_content'])){
             $updateArticle = new UpdateArticle(id:(int) $this->id , title: $_POST['update_title'], content: $_POST['update_content']);
             PostUpdateArticleService ::postUpdateArticle($updateArticle);
         }
+
+        $result = self::render(GetPostDetailService::getPostArticleDetail($this->id));
 
         return [
             'status_code' => 200,
