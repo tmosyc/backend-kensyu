@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 namespace App\Repository;
@@ -13,7 +12,6 @@ class GetPostDetailRepository
 {
     public static function selectArticleDetail($id, PDO $pdo = null)
     {
-        var_dump($id);
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
         }

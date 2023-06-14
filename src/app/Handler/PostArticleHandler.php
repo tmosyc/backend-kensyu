@@ -18,10 +18,10 @@ class PostArticleHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
-        $result = self::render(PostService::getPostList());
-
         $article = new Article(title: $_POST['title'],content: $_POST['content']);
         PostArticleService::ArticlePostList($article);
+
+        $result = self::render(PostService::getPostList());
 
         return [
             "status_code" => 200,
