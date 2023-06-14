@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Model\UpdateArticle;
+use App\Model\EditArticle;
 use App\Service\PostUpdateArticleService;
 
 class PostUpdateArticleViewHandler implements HandlerInterface

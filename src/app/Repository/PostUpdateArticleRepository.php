@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Model\UpdateArticle;
+use App\Model\EditArticle;
 use PDO;
 
 class PostUpdateArticleRepository
@@ -14,7 +14,7 @@ class PostUpdateArticleRepository
      * @param $pdo
      * @return void
      */
-    public static function updateArticle(UpdateArticle $updateArticle, $pdo = null): void
+    public static function updateArticle(EditArticle $updateArticle, $pdo = null): void
     {
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();

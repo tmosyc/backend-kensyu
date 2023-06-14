@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Model\UpdateArticle;
+use App\Model\EditArticle;
 use App\Repository\DbConnect;
 use PDO;
 
 class PostArticleDeleteRepository
 {
-    public static function deleteRepo(UpdateArticle $deleteArticle, $pdo=null)
+    public static function deleteRepo(EditArticle $deleteArticle, $pdo=null)
     {
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();

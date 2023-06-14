@@ -1,6 +1,6 @@
 <?php
 namespace App\Model;
-class UpdateArticle
+class EditArticle
 {
     /**
      * @param int $id
