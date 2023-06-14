@@ -14,15 +14,12 @@ class App
         $handler = Route::getHandler($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
 
-
         $req = [
             'method' => $_SERVER['REQUEST_METHOD'],
             'path' => $_SERVER['REQUEST_URI'],
             'get' => $_GET,
             'post' => $_POST,
         ];
-
-
 
         $res = $handler->run($req);
 
