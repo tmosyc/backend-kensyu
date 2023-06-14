@@ -3,5 +3,3 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ index.php [QSA,L]
-RewriteCond %{REQUEST_METHOD} PUT
-RewriteRule ^example/([0-9]+)/?$ example.php?id=$1 [NC,L]
