@@ -33,6 +33,10 @@ class PostUpdateArticleViewHandler implements HandlerInterface
         $body .= "<input type='text' name='update_content' size=30 placeholder='内容を入力してください'> ";
         $body .= "<button type='submit' name='content_update'>update</button> ";
         $body .= "</form>";
+        $body .= "<form action='/posts/{$id}/delete' method='post'>";
+        $body .= "<input type='hidden' name='_method' value='DELETE'>";
+        $body .= "<button type='submit'>delete</button>";
+        $body .= "</form>";
         $body .= "</body>";
 
         return $body;
