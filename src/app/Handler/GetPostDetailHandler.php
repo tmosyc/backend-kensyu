@@ -33,10 +33,7 @@ class GetPostDetailHandler implements HandlerInterface
         $body .="<h1>$title</h1>";
         $body .="<p>$content</p>";
         $body .="<p>$author_id</p>";
-        $body .= "<form action='/posts/{$post->id}/update' method='post'>";
-        $body .= "<button type='submit'>update</button>";
-        $body .= "</form>";
-        $body .= "</form>";
+        $body .="<button onclick='location.href=\"/posts/{$post->id}/update\"'>update</button>";
         $body .= "<form action='/posts/{$post->id}/delete' method='post'>";
         $body .= "<input type='hidden' name='_method' value='DELETE'>";
         $body .= "<button type='submit'>delete</button>";

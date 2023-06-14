@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Repository\DbConnect;
-use App\Model\Post;
+use App\Model\Article;
 
 class PostArticleRepository
 {
-    public static function insertArticle($article, PDO $pdo = null): void
+    public static function insertArticle(Article $article, PDO $pdo = null): void
     {
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
