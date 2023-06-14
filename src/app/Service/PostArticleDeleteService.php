@@ -8,8 +8,8 @@ use App\Repository\PostArticleDeleteRepository;
 
 class PostArticleDeleteService
 {
-    public static function deleteArticle($deleteArticle)
+    public static function deleteArticle($id)
     {
-        return PostArticleDeleteRepository::deleteRepo($deleteArticle);
+        return PostArticleDeleteRepository::deleteRepo($id);
     }
 }

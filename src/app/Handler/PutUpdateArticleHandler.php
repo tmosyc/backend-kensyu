@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Model\EditArticle;
+use App\Model\UpdateArticle;
 use App\Service\GetPostDetailService;
 use App\Service\PostUpdateArticleService;
 
@@ -19,7 +19,7 @@ class PutUpdateArticleHandler implements HandlerInterface
     public function run(array $req): array
     {
         if (isset($_POST["update_title"], $_POST['update_content'])){
-            $updateArticle = new EditArticle(id:(int) $this->id , title: $_POST['update_title'], content: $_POST['update_content']);
+            $updateArticle = new UpdateArticle(id:(int) $this->id , title: $_POST['update_title'], content: $_POST['update_content']);
             PostUpdateArticleService ::postUpdateArticle($updateArticle);
         }
 

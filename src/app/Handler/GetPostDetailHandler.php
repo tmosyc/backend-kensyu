@@ -2,7 +2,7 @@
 namespace App\Handler;
 
 use App\Model\Post;
-use App\Model\EditArticle;
+use App\Model\UpdateArticle;
 use App\Service\GetPostDetailService;
 use App\Service\PostUpdateArticleService;
 

@@ -18,7 +18,6 @@ class PostArticleHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
-
         $article = new Article(title: $_POST['title'],content: $_POST['content']);
         PostArticleService::ArticlePostList($article);
 

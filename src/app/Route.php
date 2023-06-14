@@ -27,10 +27,6 @@ class Route
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;
         }
-        if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === '/posts') {
-            return new GetPostListHandler;
-        }
-
         if ($method === 'GET' && $path === "/posts/{$id}") {
             return  new GetPostDetailHandler($id);
         }
