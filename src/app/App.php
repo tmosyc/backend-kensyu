@@ -20,7 +20,6 @@ class App
             'path' => $_SERVER['REQUEST_URI'],
             'get' => $_GET,
             'post' => $_POST,
-            'put' => []
         ];
 
 
