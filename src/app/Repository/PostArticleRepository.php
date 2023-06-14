@@ -8,7 +8,7 @@ use App\Model\Post;
 
 class PostArticleRepository
 {
-    public static function insertArticle(Post $article, PDO $pdo = null): void
+    public static function insertArticle($article, PDO $pdo = null): void
     {
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
