@@ -11,6 +11,7 @@ use App\Handler\NotFoundHandler;
 use App\Handler\PostArticleHandler;
 use App\Handler\PostUpdateArticleViewHandler;
 use App\Handler\PutUpdateArticleHandler;
+use App\Handler\PostArticleDeleteHandler;
 
 class Route
 {
@@ -21,6 +22,7 @@ class Route
      */
     public static function getHandler(string $method, string $path,): HandlerInterface
     {
+
         $id = explode('/', $path)[2];
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;
@@ -38,8 +40,12 @@ class Route
             return new PutUpdateArticleHandler($id);
         }
         if ($method === 'POST' && $path === "/posts/{$id}") {
-            return  new GetPostDetailHandler($id);
+            return new GetPostDetailHandler($id);
         }
+        if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete"){
+            return new PostArticleDeleteHandler($id);
+        }
+
         return new NotFoundHandler;
     }
 }
