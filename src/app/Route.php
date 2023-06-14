@@ -31,7 +31,7 @@ class Route
         if ($method === 'POST' && $path === "/posts") {
             return new PostArticleHandler;
         }
-        if ($method === 'POST' && $path === "/posts/{$id}/update"){
+        if ($method === 'GET' && $path === "/posts/{$id}/update"){
             return new PostUpdateArticleViewHandler($id);
         }
         if ($method === 'POST' && $_POST['_method'] === 'PUT' && $path === "/posts/{$id}"){
