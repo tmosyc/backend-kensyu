@@ -6,8 +6,10 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Model\Article;
+//use App\Model\Image;
 use App\Service\PostService;
 use App\Service\PostArticleService;
+use App\Service\PostImageService;
 
 
 class PostArticleHandler implements HandlerInterface
@@ -22,6 +24,13 @@ class PostArticleHandler implements HandlerInterface
             $article = new Article(title: $_POST['title'], content: $_POST['content']);
             PostArticleService::ArticlePostList($article);
         }
+//        if (isset($_POST['images'])) {
+//            $image_array = $_POST['images'];
+//            PostImageService::PostImageList($image_array);
+//        }
+//        var_dump($_POST['images']);
+//        var_dump($_POST['check']);
+
         $result = self::render(PostService::getPostList());
 
         return [
@@ -45,9 +54,12 @@ class PostArticleHandler implements HandlerInterface
         $body .= "<form action='/posts' method='post'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
+        $body .= "<input type='file' id='images' name='images[]' accept='image/*' multiple>";
+        $body .= "<h5 class='image-attribute'></h5>";
         $body .= "<button type='submit' name='content_post'>submit</button> ";
         $body .= "</form>";
         $body .= "<p><font color='red'>{$validation_text}</font></p>";
+        $body .= "<script src='./../../js/ImageNameDisplay.js'></script>";
         foreach ($posts as $post) {
             $title = htmlspecialchars($post->title);
             $body .= "<a href=posts/$post->id>$title</a>";

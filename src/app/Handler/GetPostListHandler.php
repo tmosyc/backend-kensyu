@@ -35,8 +35,11 @@ class GetPostListHandler implements HandlerInterface
         $body .= "<form action='/posts' method='post'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
+        $body .= "<input type='file' id='images' name='images[]' accept='image/*' multiple>";
+        $body .= "<h5 class='image-attribute'></h5>";
         $body .= "<button type='submit' name='content_post'>submit</button> ";
         $body .= "</form>";
+        $body .= "<script src='./../../js/ImageNameDisplay.js'></script>";
         foreach ($posts as $post) {
             $title = htmlspecialchars($post->title);
             $body .= "<a href=posts/{$post->id}>$title</a>";
