@@ -32,10 +32,10 @@ class PostArticleRepository
                 mkdir(dirname(__DIR__,2)."/images/article/{$article_id}/",0777);
             }
             foreach ($article->image_array['tmp_name'] as $tmp_name){
-                if (strpos($_FILES['images']['name'][$i], 'jpg')){
+                if (strpos($article->image_array['name'][$i], 'jpg')){
                     $img_name = "{$i}.jpg";
                 }
-                if (strpos($_FILES['images']['name'][$i], 'png')) {
+                if (strpos($article->image_array['name'][$i], 'png')) {
                     $img_name = "{$i}.png";
                 }
                 move_uploaded_file($tmp_name, dirname(__DIR__,2)."/images/article/{$article_id}/" . $img_name);

@@ -8,7 +8,10 @@ class PostArticleService
 {
     /**
      * @param $article
-     * @return array|null
+     * @property string $title,
+     * @property string $content,
+     * @property array $image_array,
+     * @return void
      */
     public static function ArticlePostList($article)
     {
