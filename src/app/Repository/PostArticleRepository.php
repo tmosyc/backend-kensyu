@@ -19,7 +19,6 @@ class PostArticleRepository
         $stmt->execute($params);
         $article_id = $stmt->fetch(PDO::FETCH_ASSOC)['article_id'];
         $i=0;
-        var_dump($article->image_array);
         if (isset($article->image_array)){
             mkdir(dirname(__DIR__,2)."/images/{$article_id}/",0777);
         }
