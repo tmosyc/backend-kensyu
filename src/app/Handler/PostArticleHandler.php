@@ -6,10 +6,8 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Model\Article;
-//use App\Model\Image;
 use App\Service\PostService;
 use App\Service\PostArticleService;
-use App\Service\PostImageService;
 
 
 class PostArticleHandler implements HandlerInterface
