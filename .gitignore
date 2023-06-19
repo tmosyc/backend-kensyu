@@ -5,3 +5,4 @@ memo.txt
 /src/vendor
 /src/.env
 .DS_Store
+src/images/

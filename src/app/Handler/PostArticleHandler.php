@@ -20,16 +20,10 @@ class PostArticleHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
-        if (strlen($_POST['title']) >= 1 && strlen($_POST['content']) >= 1) {
-            $article = new Article(title: $_POST['title'], content: $_POST['content']);
+        if (strlen($_POST['title']) >= 1 && strlen($_POST['content']) >= 1 ) {
+            $article = new Article(title: $_POST['title'], content: $_POST['content'],image_array: $_FILES['images']);
             PostArticleService::ArticlePostList($article);
         }
-//        if (isset($_POST['images'])) {
-//            $image_array = $_POST['images'];
-//            PostImageService::PostImageList($image_array);
-//        }
-//        var_dump($_POST['images']);
-//        var_dump($_POST['check']);
 
         $result = self::render(PostService::getPostList());
 
@@ -51,7 +45,7 @@ class PostArticleHandler implements HandlerInterface
         }
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
-        $body .= "<form action='/posts' method='post'>";
+        $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
         $body .= "<input type='file' id='images' name='images[]' accept='image/*' multiple>";

@@ -7,7 +7,8 @@ use App\Repository\PostArticleRepository;
 class PostArticleService
 {
     /**
-     * @return array
+     * @param $article
+     * @return array|null
      */
     public static function ArticlePostList($article)
     {
