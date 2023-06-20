@@ -22,6 +22,7 @@ class PostArticleRepository
             }
 
             $pdo -> beginTransaction();
+
             $image_name_array = $article ->image_name;
             if (is_null($_POST['check'])) {
                 $thumbnail_id = 'null';
@@ -29,13 +30,13 @@ class PostArticleRepository
                 $thumbnail_id = array_search($_POST['check'], $image_name_array);
             }
 
-            $article_insert = $pdo->prepare("INSERT INTO article(user_id,title,text,$thumbnail_id) VALUES (1, :title,:content,1) RETURNING article_id");
+            $article_insert = $pdo->prepare("INSERT INTO article(user_id,title,text,thumbnail_image_id) VALUES (1, :title,:content,$thumbnail_id) RETURNING article_id");
             $params = array(':title' => $article->title, ':content' => $article->content);
             $article_insert->execute($params);
             $article_id = $article_insert->fetch(PDO::FETCH_ASSOC)['article_id'];
             $i=0;
 
-            if (isset($article->image_array)){
+            if (isset($article->image_name)){
                 mkdir(dirname(__DIR__,2)."/images/article/{$article_id}/",0777);
             }
 
