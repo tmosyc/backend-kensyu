@@ -19,7 +19,10 @@ class PostArticleHandler implements HandlerInterface
     public function run(array $req): array
     {
         if (strlen($_POST['title']) >= 1 && strlen($_POST['content']) >= 1 ) {
-            $article = new Article(title: $_POST['title'], content: $_POST['content'],image_array: $_FILES['images']);
+            $article = new Article(title: $_POST['title'],
+                content: $_POST['content'],
+                image_name: $_FILES['images']['name'],
+                image_tmp_name: $_FILES['images']['tmp_name']);
             PostArticleService::ArticlePostList($article);
         }
 
