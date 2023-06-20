@@ -7,7 +7,11 @@ use App\Repository\PostArticleRepository;
 class PostArticleService
 {
     /**
-     * @return array
+     * @param $article
+     * @property string $title,
+     * @property string $content,
+     * @property array $image_array,
+     * @return void
      */
     public static function ArticlePostList($article)
     {

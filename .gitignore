@@ -4,3 +4,5 @@ memo.txt
 .idea/
 /src/vendor
 /src/.env
+.DS_Store
+src/images/

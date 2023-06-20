@@ -11,6 +11,7 @@ class Article
     public function __construct(
         public string $title,
         public string $content,
+        public array $image_array,
     )
     {
     }
