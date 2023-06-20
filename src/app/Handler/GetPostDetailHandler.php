@@ -37,6 +37,7 @@ class GetPostDetailHandler implements HandlerInterface
         foreach ($post->image_array as $image_id){
             $body .= "<img src='{$img_path}/{$post->id}/{$image_id}.jpg' width='300' height='200'>";
         }
+        $body .= "<br>";
         $body .="<button onclick='location.href=\"/posts/{$post->id}/update\"'>update</button>";
         $body .= "<form action='/posts/{$post->id}/delete' method='post'>";
         $body .= "<input type='hidden' name='_method' value='DELETE'>";

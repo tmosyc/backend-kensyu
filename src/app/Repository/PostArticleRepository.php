@@ -40,21 +40,29 @@ class PostArticleRepository
                 mkdir(dirname(__DIR__,2)."/images/article/{$article_id}/",0777);
             }
 
-            foreach ($article->image_tmp_name as $tmp_name){
-                if (strpos($article->image_name[$i], 'jpg')){
+            foreach ($article->image_tmp_name as $tmp_name) {
+                if (strpos($article->image_name[$i], 'jpg')) {
                     $img_name = "{$i}.jpg";
                 }
                 if (strpos($article->image_name[$i], 'png')) {
                     $img_name = "{$i}.png";
                 }
 
-                move_uploaded_file($tmp_name, dirname(__DIR__,2)."/images/article/{$article_id}/" . $img_name);
+                move_uploaded_file($tmp_name, dirname(__DIR__, 2) . "/images/article/{$article_id}/" . $img_name);
                 $image_insert = $pdo->prepare("INSERT INTO image(article_id, resource_id) VALUES (:article_id,:index)");
                 $params = array(':article_id' => $article_id, ':index' => $i);
                 $image_insert->execute($params);
-                $i = $i+1;
+                $i = $i + 1;
             }
-            if ($article_insert && $image_insert) {
+
+            foreach ($article->tag_id as $tag_id) {
+                var_dump($tag_id);
+                $tag_insert = $pdo->prepare("INSERT INTO article_tag (tag_id, article_id) VALUES (:tag_id,:article_id)");
+                $params = array(':tag_id' => $tag_id, ':article_id' => $article_id);
+                $tag_insert -> execute($params);
+            }
+
+            if ($article_insert && $image_insert && $tag_insert) {
                 $pdo->commit();
             }
         } catch(PDOException $e) {
