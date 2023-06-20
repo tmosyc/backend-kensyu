@@ -18,7 +18,6 @@ class PostArticleHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
-        var_dump($_POST['tags']);
         if (strlen($_POST['title']) >= 1 && strlen($_POST['content']) >= 1 ) {
             $article = new Article(title: $_POST['title'],
                 content: $_POST['content'],

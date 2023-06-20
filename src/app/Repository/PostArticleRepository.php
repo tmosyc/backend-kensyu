@@ -56,7 +56,6 @@ class PostArticleRepository
             }
 
             foreach ($article->tag_id as $tag_id) {
-                var_dump($tag_id);
                 $tag_insert = $pdo->prepare("INSERT INTO article_tag (tag_id, article_id) VALUES (:tag_id,:article_id)");
                 $params = array(':tag_id' => $tag_id, ':article_id' => $article_id);
                 $tag_insert -> execute($params);
