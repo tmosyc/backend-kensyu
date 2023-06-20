@@ -6,7 +6,6 @@ namespace App\Repository;
 use App\Model\Post;
 use PDO;
 
-
 class PostRepository
 {
     /**
@@ -30,9 +29,7 @@ class PostRepository
             );
             $posts[] = $post;
         }
-
         $pdo = null;
-
         return $posts;
     }
 }

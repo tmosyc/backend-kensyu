@@ -1,6 +1,5 @@
 INSERT INTO users (name,password,mail_address) VALUES ('John','aaa','aaa@gmail.com');
 
-['総合','テクノロジー','モバイル','アプリ','エンタメ','ビューティー','ファッション','ライフスタイル','ビジネス','グルメ','スポーツ'];
 INSERT INTO tag (tagname) VALUES ('総合');
 INSERT INTO tag (tagname) VALUES ('テクノロジー');
 INSERT INTO tag (tagname) VALUES ('モバイル');

@@ -49,7 +49,7 @@ class PostArticleRepository
                 }
 
                 move_uploaded_file($tmp_name, dirname(__DIR__, 2) . "/images/article/{$article_id}/" . $img_name);
-                $image_insert = $pdo->prepare("INSERT INTO image(article_id, resource_id) VALUES (:article_id,:index)");
+                $image_insert = $pdo->prepare("INSERT INTO image(article_id, resource_id) VALUES (:article_id, :index)");
                 $params = array(':article_id' => $article_id, ':index' => $i);
                 $image_insert->execute($params);
                 $i = $i + 1;

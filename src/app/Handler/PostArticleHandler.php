@@ -46,12 +46,20 @@ class PostArticleHandler implements HandlerInterface
         if (empty($_POST['title']) || empty($_POST['content'])){
             $validation_text = '文字を入れてください';
         }
+        $tags = ['総合','テクノロジー','モバイル','アプリ','エンタメ','ビューティー','ファッション','ライフスタイル','ビジネス','グルメ','スポーツ'];
+        $img_path = "../../images/article";
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
         $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
         $body .= "<input type='file' id='images' name='images[]' accept='image/*' multiple>";
+        $body .= "<select name='tags[]' multiple>";
+        foreach ($tags as $i => $tag){
+            $i=$i+1;
+            $body .= "<option value={$i}>{$tag}</option>";
+        }
+        $body .= "</select>";
         $body .= "<h5 class='image-attribute'></h5>";
         $body .= "<button type='submit' name='content_post'>submit</button> ";
         $body .= "</form>";
@@ -60,7 +68,17 @@ class PostArticleHandler implements HandlerInterface
         foreach ($posts as $post) {
             $title = htmlspecialchars($post->title);
             $body .= "<a href=posts/$post->id>$title</a>";
+
+            if (isset($post->thumbnail_image_id)) {
+                if (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$post->thumbnail_image_id}.jpg")) {
+                    $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.jpg' width='300' height='200'>";
+                } elseif (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$post->thumbnail_image_id}.png")) {
+                    $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.png' width='300' height='200'>";
+                }
+            }
             $body .= "<br>";
+            $body .= "<br>";
+
         }
         $body .= "</body>";
 

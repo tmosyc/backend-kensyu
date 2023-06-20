@@ -25,12 +25,12 @@ CREATE TABLE image (
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                        FOREIGN KEY (article_id) REFERENCES article (article_id)
-)
+);
 
 CREATE TABLE tag (
                      tag_id SERIAL PRIMARY KEY,
                      tagname VARCHAR(10) NOT NULL UNIQUE
-)
+);
 
 CREATE TABLE article_tag (
                              article_tag_id SERIAL PRIMARY KEY,

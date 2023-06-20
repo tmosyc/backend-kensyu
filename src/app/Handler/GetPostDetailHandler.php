@@ -35,7 +35,11 @@ class GetPostDetailHandler implements HandlerInterface
         $body .="<p>$content</p>";
         $body .="<p>$author_id</p>";
         foreach ($post->image_array as $image_id){
-            $body .= "<img src='{$img_path}/{$post->id}/{$image_id}.jpg' width='300' height='200'>";
+            if (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$image_id}.jpg")) {
+                $body .= "<img src='{$img_path}/{$post->id}/{$image_id}.jpg' width='300' height='200'>";
+            } elseif (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$image_id}.png")) {
+                $body .= "<img src='{$img_path}/{$post->id}/{$image_id}.png' width='300' height='200'>";
+            }
         }
         $body .= "<br>";
         $body .="<button onclick='location.href=\"/posts/{$post->id}/update\"'>update</button>";

@@ -28,7 +28,7 @@ class GetPostDetailRepository
             $select_image = $pdo->prepare("SELECT COUNT(article_id) FROM image WHERE article_id=:id");
             $select_image->bindParam(':id', $id, PDO::PARAM_INT);
             $select_image->execute();
-            $image_count = $select_image->fetch(PDO::FETCH_ASSOC);
+            $image_count= $select_image->fetch(PDO::FETCH_ASSOC);
             $image_array = range(0, $image_count);
 
             $detail = new Post(

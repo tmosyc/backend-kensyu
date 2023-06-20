@@ -14,7 +14,6 @@ class Article
         public array $image_name,
         public array $image_tmp_name,
         public ?array $tag_id
-
     )
     {
     }
