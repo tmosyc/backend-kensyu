@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Repository\DbConnect;
-use mysql_xdevapi\Exception;
+use Exception;
 use PDO;
 use App\Model\Post;
 

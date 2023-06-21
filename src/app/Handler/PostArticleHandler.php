@@ -8,6 +8,7 @@ namespace App\Handler;
 use App\Model\Article;
 use App\Service\PostService;
 use App\Service\PostArticleService;
+use App\Service\TagsListService;
 
 
 class PostArticleHandler implements HandlerInterface
@@ -27,7 +28,7 @@ class PostArticleHandler implements HandlerInterface
             PostArticleService::ArticlePostList($article);
         }
 
-        $result = self::render(PostService::getPostList());
+        $result = self::render(PostService::getPostList(),TagsListService::tagList());
 
         return [
             "status_code" => 200,
@@ -39,13 +40,12 @@ class PostArticleHandler implements HandlerInterface
      * @param Post[] $posts
      * @return string
      */
-    private static function render(array $posts): string
+    private static function render(array $posts, $tags): string
     {
         $validation_text="";
         if (empty($_POST['title']) || empty($_POST['content'])){
             $validation_text = '文字を入れてください';
         }
-        $tags = ['総合','テクノロジー','モバイル','アプリ','エンタメ','ビューティー','ファッション','ライフスタイル','ビジネス','グルメ','スポーツ'];
         $img_path = "../../images/article";
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
@@ -54,9 +54,8 @@ class PostArticleHandler implements HandlerInterface
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
         $body .= "<input type='file' id='images' name='images[]' accept='image/*' multiple>";
         $body .= "<select name='tags[]' multiple>";
-        foreach ($tags as $i => $tag){
-            $i=$i+1;
-            $body .= "<option value={$i}>{$tag}</option>";
+        foreach ($tags as $tag){
+            $body .= "<option value={$tag->tag_id}>{$tag->tagname}</option>";
         }
         $body .= "</select>";
         $body .= "<h5 class='image-attribute'></h5>";
@@ -77,7 +76,6 @@ class PostArticleHandler implements HandlerInterface
             }
             $body .= "<br>";
             $body .= "<br>";
-
         }
         $body .= "</body>";
 
