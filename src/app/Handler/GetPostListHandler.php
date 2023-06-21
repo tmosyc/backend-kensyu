@@ -52,7 +52,6 @@ class GetPostListHandler implements HandlerInterface
             $title = htmlspecialchars($post->title);
             $body .= "<a href=posts/{$post->id}>$title</a>";
             if (isset($post->thumbnail_image_id)) {
-                $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.jpg' width='300' height='200'>";
                 if (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$post->thumbnail_image_id}.jpg")) {
                     $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.jpg' width='300' height='200'>";
                 } elseif (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$post->thumbnail_image_id}.png")) {

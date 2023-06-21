@@ -14,7 +14,7 @@ class PostArticleRepository
      * @param PDO|null $pdo
      * @return void
      */
-    public static function insertArticle(Article $article, PDO $pdo = null): void
+    public static function insertArticle(Article $article, $thumbnail_id ,PDO $pdo = null): void
     {
         try {
             if (is_null($pdo)) {
@@ -22,13 +22,6 @@ class PostArticleRepository
             }
 
             $pdo -> beginTransaction();
-
-            $image_name_array = $article ->image_name;
-            if (is_null($_POST['check'])) {
-                $thumbnail_id = 'null';
-            } else {
-                $thumbnail_id = array_search($_POST['check'], $image_name_array);
-            }
 
             $article_insert = $pdo->prepare("INSERT INTO article(user_id,title,text,thumbnail_image_id) VALUES (1, :title,:content,$thumbnail_id) RETURNING article_id");
             $params = array(':title' => $article->title, ':content' => $article->content);

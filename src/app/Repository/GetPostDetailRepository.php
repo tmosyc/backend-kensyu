@@ -43,7 +43,6 @@ class GetPostDetailRepository
             if ($select_image && $select_article) {
                 $pdo->commit();
             }
-
         } catch (Exception $e) {
             echo $e->getMessage();
             $pdo->rollBack();
