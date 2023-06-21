@@ -20,7 +20,7 @@ class GetPostDetailRepository
                 $pdo = DbConnect::dbConnect();
             }
             $pdo->beginTransaction();
-            $select_article = $pdo->prepare("SELECT article_id, title, text, user_id FROM article WHERE article_id = :id");
+            $select_article = $pdo->prepare("SELECT article_id, title, text, user_id, thumbnail_image_id FROM article WHERE article_id = :id");
             $select_article->bindParam(':id', $id, PDO::PARAM_INT);
             $select_article->execute();
             $results = $select_article->fetch(PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class GetPostDetailRepository
                 title: $results['title'],
                 content: $results['text'],
                 author_id: $results['user_id'],
-                thumbnail_image_id: null,
+                thumbnail_image_id: $results['thumbnail_image_id'],
                 image_array: $image_array
             );
 
