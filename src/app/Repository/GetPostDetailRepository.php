@@ -25,10 +25,14 @@ class GetPostDetailRepository
             $select_article->execute();
             $results = $select_article->fetch(PDO::FETCH_ASSOC);
 
-            $select_image = $pdo->prepare("SELECT resource_id FROM image WHERE article_id=:id");
+            $select_image = $pdo->prepare("SELECT article_id, resource_id FROM image WHERE article_id=:id");
             $select_image->bindParam(':id', $id, PDO::PARAM_INT);
             $select_image->execute();
-            $image_result= $select_image->fetch(PDO::FETCH_ASSOC);
+            $image_array = [];
+            while ($row = $select_image->fetch(PDO::FETCH_ASSOC)) {
+                $image_array[] = $row['resource_id'];
+            }
+            var_dump($image_array);
 
             $detail = new Post(
                 id: $results['article_id'],
@@ -36,8 +40,9 @@ class GetPostDetailRepository
                 content: $results['text'],
                 author_id: $results['user_id'],
                 thumbnail_image_id: $results['thumbnail_image_id'],
-                image_array: $image_result['resource_id']
+                image_array: $image_array
             );
+            var_dump($detail);
 
             if ($select_image && $select_article) {
                 $pdo->commit();
