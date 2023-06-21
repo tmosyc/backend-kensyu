@@ -32,7 +32,6 @@ class GetPostDetailRepository
             while ($row = $select_image->fetch(PDO::FETCH_ASSOC)) {
                 $image_array[] = $row['resource_id'];
             }
-            var_dump($image_array);
 
             $detail = new Post(
                 id: $results['article_id'],
