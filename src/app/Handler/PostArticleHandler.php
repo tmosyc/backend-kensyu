@@ -24,7 +24,8 @@ class PostArticleHandler implements HandlerInterface
                 content: $_POST['content'],
                 image_name: $_FILES['images']['name'],
                 image_tmp_name: $_FILES['images']['tmp_name'],
-                tag_id: $_POST['tags']);
+                tag_id: $_POST['tags'],
+                thumbnail_check: $_POST['check']);
             PostArticleService::ArticlePostList($article);
         }
 

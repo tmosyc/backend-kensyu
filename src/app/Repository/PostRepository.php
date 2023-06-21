@@ -25,7 +25,7 @@ class PostRepository
                 content: $row['text'],
                 author_id: $row['user_id'],
                 thumbnail_image_id:$row['thumbnail_image_id'],
-                image_array:null,
+                image_array:null
             );
             $posts[] = $post;
         }

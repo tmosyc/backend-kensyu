@@ -13,7 +13,8 @@ class Article
         public string $content,
         public array $image_name,
         public array $image_tmp_name,
-        public ?array $tag_id
+        public ?array $tag_id,
+        public ?string $thumbnail_check
     )
     {
     }
