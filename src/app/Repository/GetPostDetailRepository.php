@@ -41,7 +41,6 @@ class GetPostDetailRepository
                 thumbnail_image_id: $results['thumbnail_image_id'],
                 image_array: $image_array
             );
-            var_dump($detail);
 
             if ($select_image && $select_article) {
                 $pdo->commit();
