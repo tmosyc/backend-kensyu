@@ -11,7 +11,10 @@ class Article
     public function __construct(
         public string $title,
         public string $content,
-        public array $image_array,
+        public array $image_name,
+        public array $image_tmp_name,
+        public ?array $tag_id,
+        public ?string $thumbnail_check
     )
     {
     }
