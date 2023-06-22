@@ -17,7 +17,7 @@ class PostUserRegisterHandler implements HandlerInterface
     public static function render()
     {
         $body = "<body>";
-        $body .= "<form action='/posts' method='post'>";
+        $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='username' placeholder='ユーザー名'>";
         $body .= "<input type='email' name='email' placeholder='メールアドレス'>";
         $body .= "<input type='text' name='password' placeholder='パスワード'>";

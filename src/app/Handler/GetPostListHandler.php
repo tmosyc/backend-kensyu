@@ -7,7 +7,9 @@ namespace App\Handler;
 use App\Model\Post;
 use App\Service\PostService;
 use App\Service\PostArticleService;
+use App\Service\PostUserRegisterService;
 use App\Service\TagsListService;
+use App\Model\User;
 
 class GetPostListHandler implements HandlerInterface
 {
@@ -17,6 +19,19 @@ class GetPostListHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
+        var_dump($_FILES['profile_image']);
+        //user登録
+        if (isset($_POST['username']) || isset($_POST['email']) || isset($_POST['password'])){
+            $user = new User(
+                username: $_POST['username'],
+                email: $_POST['email'],
+                password: $_POST['password'],
+                profile_img_name: $_FILES['profile_image']['name'],
+                profile_img_tmp:$_FILES['profile_image']['tmp_name']
+            );
+            PostUserRegisterService::insertUser($user);
+        }
+
         $result = self::render(PostService::getPostList(), TagsListService::tagList());
 
         return [
