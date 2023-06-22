@@ -10,6 +10,7 @@ use App\Handler\GetPostDetailHandler;
 use App\Handler\NotFoundHandler;
 use App\Handler\PostArticleHandler;
 use App\Handler\PostUpdateArticleViewHandler;
+use App\Handler\PostUserRegisterHandler;
 use App\Handler\PutUpdateArticleHandler;
 use App\Handler\PostArticleDeleteHandler;
 
@@ -22,13 +23,21 @@ class Route
      */
     public static function getHandler(string $method, string $path,): HandlerInterface
     {
-
         $id = explode('/', $path)[2];
+        if ($method=== 'GET' && $path === '/user') {
+            return new PostUserRegisterHandler();
+        }
+        if ($method === 'POST' && $path === "/posts" && empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
+            return new PostUserRegisterHandler();
+        }
+        if ($method === 'POST' && $path === "/posts" && isset($_POST['username']) || isset($_POST['email']) || isset($_POST['password'])) {
+            return new GetPostListHandler();
+        }
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;
         }
         if ($method === 'GET' && $path === "/posts/{$id}") {
-            return  new GetPostDetailHandler($id);
+            return new GetPostDetailHandler($id);
         }
         if ($method === 'POST' && $path === "/posts") {
             return new PostArticleHandler;
