@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Handler\PostUserRegisterHandler;
+use App\Handler\PostUserRegisterViewHandler;
 use App\Repository\PostUserRegisterRepository;
 use App\Model\User;
 
@@ -12,8 +12,6 @@ class PostUserRegisterService
     {
         $max_id=PostUserRegisterRepository::maxUserId();
         $max_id=$max_id+1;
-        var_dump($max_id);
-        var_dump($user->profile_img_name);
         if (strpos($user->profile_img_name, 'jpg')) {
             $img_name = "{$max_id}.jpg";
         }

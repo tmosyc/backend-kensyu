@@ -19,7 +19,6 @@ class GetPostListHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
-        var_dump($_FILES['profile_image']);
         //user登録
         if (isset($_POST['username']) || isset($_POST['email']) || isset($_POST['password'])){
             $user = new User(

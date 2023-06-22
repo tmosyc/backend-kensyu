@@ -10,9 +10,10 @@ use App\Handler\GetPostDetailHandler;
 use App\Handler\NotFoundHandler;
 use App\Handler\PostArticleHandler;
 use App\Handler\PostUpdateArticleViewHandler;
-use App\Handler\PostUserRegisterHandler;
+use App\Handler\PostUserRegisterViewHandler;
 use App\Handler\PutUpdateArticleHandler;
 use App\Handler\PostArticleDeleteHandler;
+use App\Handler\PostUserRegisterHandler;
 
 class Route
 {
@@ -23,15 +24,14 @@ class Route
      */
     public static function getHandler(string $method, string $path,): HandlerInterface
     {
-        $id = explode('/', $path)[2];
-        if ($method=== 'GET' && $path === '/user') {
-            return new PostUserRegisterHandler();
+        if (strpos($path,'post/')){
+            $id = explode('/', $path)[2];
         }
-        if ($method === 'POST' && $path === "/posts" && empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
-            return new PostUserRegisterHandler();
+        if ($method=== 'GET' && $path === '/register') {
+            return new PostUserRegisterViewHandler();
         }
-        if ($method === 'POST' && $path === "/posts" && isset($_POST['username']) || isset($_POST['email']) || isset($_POST['password'])) {
-            return new GetPostListHandler();
+        if ($method=== 'POST' && $path === '/register') {
+            return new PostUserRegisterHandler();
         }
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;

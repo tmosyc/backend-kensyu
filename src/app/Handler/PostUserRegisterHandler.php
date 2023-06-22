@@ -1,31 +1,34 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Handler;
+
+use App\Service\PostUserRegisterService;
+use App\Model\User;
 
 class PostUserRegisterHandler implements HandlerInterface
 {
+    /**
+     * @param array $req Request
+     * @return array Response
+     */
     public function run(array $req): array
     {
-        $result = self::render();
+        //user登録
+        if (isset($_POST['username']) || isset($_POST['email']) || isset($_POST['password'])) {
+            $user = new User(
+                username: $_POST['username'],
+                email: $_POST['email'],
+                password: $_POST['password'],
+                profile_img_name: $_FILES['profile_image']['name'],
+                profile_img_tmp: $_FILES['profile_image']['tmp_name']
+            );
+            PostUserRegisterService::insertUser($user);
+        }
 
-        return [
-            'status_code' => 200,
-            'body' => "<html>{$result}</html>",
-        ];
+        header("Location:http://localhost/posts",true, 301);
+        exit();
     }
 
-    public static function render()
-    {
-        $body = "<body>";
-        $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
-        $body .= "<input type='text' name='username' placeholder='ユーザー名'>";
-        $body .= "<input type='email' name='email' placeholder='メールアドレス'>";
-        $body .= "<input type='text' name='password' placeholder='パスワード'>";
-        $body .= "<input type='file' name='profile_image' accept='image/*'>";
-        $body .= "<button type='submit' name='register'>Sign Up</button>";
-        $body .= "</form>";
-        $body .= "</body>";
-
-        return $body;
-    }
 }
