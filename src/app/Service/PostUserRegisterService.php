@@ -8,12 +8,28 @@ use App\Model\User;
 
 class PostUserRegisterService
 {
+    /**
+     * @param User $user
+     * @property string $username,
+     * @property string $email,
+     * @property string $password,
+     * @property ?string $profile_img_name,
+     * @property ?string $profile_img_tmp,
+     * @return void
+     */
     public static function insertUser(User $user)
     {
         PostUserRegisterRepository::insertUser($user);
     }
 
-    public static function image_register($image_tmp,$image_name, $profile_image_id)
+    /**
+     * @param $image_tmp
+     * @param $image_name
+     * @param $profile_image_id
+     * @return void
+     */
+
+    public static function image_upload($image_tmp,$image_name, $profile_image_id)
     {
         if (strpos($image_name, 'jpg')) {
             $img_name = "{$profile_image_id}.jpg";
