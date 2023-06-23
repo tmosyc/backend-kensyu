@@ -20,7 +20,7 @@ class PostUserRegisterHandler implements HandlerInterface
             $user = new User(
                 username: $_POST['username'],
                 email: $_POST['email'],
-                password: $_POST['password'],
+                password: password_hash($_POST['password'],PASSWORD_DEFAULT),
                 profile_img_name: $_FILES['profile_image']['name'],
                 profile_img_tmp: $_FILES['profile_image']['tmp_name']
             );
@@ -30,5 +30,4 @@ class PostUserRegisterHandler implements HandlerInterface
         header("Location:http://localhost/posts",true, 301);
         exit();
     }
-
 }

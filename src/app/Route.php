@@ -24,7 +24,7 @@ class Route
      */
     public static function getHandler(string $method, string $path,): HandlerInterface
     {
-        if (strpos($path,'post/')){
+        if (strpos($path,'posts/')){
             $id = explode('/', $path)[2];
         }
         if ($method=== 'GET' && $path === '/register') {
@@ -54,7 +54,6 @@ class Route
         if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete"){
             return new PostArticleDeleteHandler($id);
         }
-
         return new NotFoundHandler;
     }
 }

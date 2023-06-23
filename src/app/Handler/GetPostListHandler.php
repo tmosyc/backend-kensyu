@@ -10,7 +10,6 @@ use App\Service\PostArticleService;
 use App\Service\PostUserRegisterService;
 use App\Service\TagsListService;
 use App\Model\User;
-
 class GetPostListHandler implements HandlerInterface
 {
     /**
