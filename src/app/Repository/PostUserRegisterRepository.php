@@ -34,6 +34,7 @@ class PostUserRegisterRepository
             $params = array(':last_id' => $user_last_id);
             $update_image_id->execute($params);
         }
-        PostUserRegisterService::image_upload($user->profile_img_tmp, $user->profile_img_name, $user_last_id);
+
+        return $user_last_id;
     }
 }
