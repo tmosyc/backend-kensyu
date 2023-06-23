@@ -24,6 +24,7 @@ class PostUserRegisterRepository
             $pdo = DbConnect::dbConnect();
         }
 
+
         $insert_user = $pdo->prepare('INSERT INTO users (name,password,mail_address,profile_image_id) VALUES (:username, :email, :password,null) RETURNING user_id');
         $params = array(':username' => $user->username, ':email' => $user->email, ':password' => $user->password);
         $insert_user->execute($params);

@@ -20,7 +20,9 @@ class PostUserRegisterService
     public static function insertUser(User $user)
     {
         $last_id = PostUserRegisterRepository::insertUser($user);
-        self::image_upload($user->profile_img_tmp, $user->profile_img_name,$last_id);
+        if (isset($last_id)) {
+            self::image_upload($user->profile_img_tmp, $user->profile_img_name, $last_id);
+        }
     }
 
     /**
