@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Handler;
@@ -11,6 +10,8 @@ use App\Service\PostUserRegisterService;
 use App\Service\TagsListService;
 use App\Model\User;
 
+session_start();
+
 class GetPostListHandler implements HandlerInterface
 {
     /**
@@ -19,17 +20,6 @@ class GetPostListHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
-        //user登録
-        if (isset($_POST['username']) || isset($_POST['email']) || isset($_POST['password'])){
-            $user = new User(
-                username: $_POST['username'],
-                email: $_POST['email'],
-                password: $_POST['password'],
-                profile_img_name: $_FILES['profile_image']['name'],
-                profile_img_tmp:$_FILES['profile_image']['tmp_name']
-            );
-            PostUserRegisterService::insertUser($user);
-        }
 
         $result = self::render(PostService::getPostList(), TagsListService::tagList());
 
@@ -45,9 +35,17 @@ class GetPostListHandler implements HandlerInterface
      */
     private static function render(array $posts, $tags): string
     {
+        if (isset($_SESSION['username'])){
+            $login_text = "{$_SESSION['username']}さんがログインしています";
+        } else {
+            $login_text = "ログインしていません";
+        }
         $img_path = "../../images/article";
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
+        $body .= "<button onclick='location.href=\"/posts/login\"'>ログイン</button>";
+        $body .= "<button onclick='location.href=\"/posts/logout\"'>ログアウト</button>";
+        $body .= "<p>{$login_text}</p>";
         $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
@@ -64,7 +62,7 @@ class GetPostListHandler implements HandlerInterface
 
         foreach ($posts as $post) {
             $title = htmlspecialchars($post->title);
-            $body .= "<a href=posts/{$post->id}>$title</a>";
+            $body .= "<a href=posts/{$post->id} name='aaa'>$title</a>";
             if (isset($post->thumbnail_image_id)) {
                 if (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$post->thumbnail_image_id}.jpg")) {
                     $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.jpg' width='300' height='200'>";
