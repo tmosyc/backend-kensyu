@@ -29,11 +29,11 @@ class GetPostDetailHandler implements HandlerInterface
         $img_path = "../../images/article";
         $title=htmlspecialchars($post->title,ENT_QUOTES);
         $content=htmlspecialchars($post->content,ENT_QUOTES);
-        $author_id=htmlspecialchars($post->author_id,ENT_QUOTES);
+        $author_name=htmlspecialchars($post->author_name,ENT_QUOTES);
         $body = "<body>";
         $body .="<h1>$title</h1>";
         $body .="<p>$content</p>";
-        $body .="<p>$author_id</p>";
+        $body .="<p>$author_name</p>";
         foreach ($post->image_array as $image_id){
             if (file_exists(dirname(__DIR__ , 2). "/images/article/{$post->id}/{$image_id}.jpg")) {
                 $body .= "<img src='{$img_path}/{$post->id}/{$image_id}.jpg' width='300' height='200'>";

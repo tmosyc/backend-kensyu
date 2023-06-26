@@ -67,7 +67,7 @@ class GetPostListHandler implements HandlerInterface
                     $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.png' width='300' height='200'>";
                 }
             }
-            $body .= "<p>from：$post->author_name</p>";
+            $body .= "<p>投稿者：$post->author_name</p>";
             $body .= "<br>";
         }
         $body .= "</body>";
