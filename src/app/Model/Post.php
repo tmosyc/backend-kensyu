@@ -16,7 +16,7 @@ class Post
         public int $id,
         public string $title,
         public string $content,
-        public int $author_id,
+        public string $author_name,
         public ?int $thumbnail_image_id,
         public ?array $image_array,
     )

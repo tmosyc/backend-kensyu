@@ -10,8 +10,6 @@ use App\Service\PostUserRegisterService;
 use App\Service\TagsListService;
 use App\Model\User;
 
-session_start();
-
 class GetPostListHandler implements HandlerInterface
 {
     /**
@@ -69,6 +67,7 @@ class GetPostListHandler implements HandlerInterface
                     $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.png' width='300' height='200'>";
                 }
             }
+            $body .= "<p>from：$post->author_name</p>";
             $body .= "<br>";
         }
         $body .= "</body>";

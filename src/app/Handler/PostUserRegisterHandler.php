@@ -7,8 +7,6 @@ namespace App\Handler;
 use App\Service\PostUserRegisterService;
 use App\Model\User;
 
-session_start();
-
 class PostUserRegisterHandler implements HandlerInterface
 {
     /**

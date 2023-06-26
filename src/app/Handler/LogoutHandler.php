@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-session_start();
-
 class LogoutHandler implements HandlerInterface
 {
     public function run(array $req): array

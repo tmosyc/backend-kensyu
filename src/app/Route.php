@@ -19,6 +19,8 @@ use App\Handler\PostUserRegisterViewHandler;
 use App\Handler\PutUpdateArticleHandler;
 use Exception;
 
+session_start();
+
 class Route
 {
     /**
@@ -86,12 +88,7 @@ class Route
         if ($method === 'GET' && $path === "/posts/logout") {
             return new LogoutHandler;
         }
-<<<<<<< HEAD
         return new NotFoundHandler;
-=======
-
-        return new NotFoundHandler();
->>>>>>> step4-2log
     }
 }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Model\Post;
+use http\QueryString;
 use PDO;
 
 class PostRepository
@@ -16,14 +17,19 @@ class PostRepository
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
         }
-        $stmt = $pdo->query('SELECT article_id,title,text,user_id,thumbnail_image_id FROM article ORDER BY article_id');
+        $query = 'SELECT article_id,title,text,name,thumbnail_image_id 
+                    FROM article INNER JOIN users ON article.user_id = users.user_id
+                        ORDER BY article_id';
+
+        $stmt = $pdo->query($query);
+
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $post = new Post(
                 id: $row['article_id'],
                 title: $row['title'],
                 content: $row['text'],
-                author_id: $row['user_id'],
+                author_name: $row['name'],
                 thumbnail_image_id:$row['thumbnail_image_id'],
                 image_array:null
             );

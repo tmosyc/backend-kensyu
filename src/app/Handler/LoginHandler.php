@@ -5,8 +5,6 @@ namespace App\Handler;
 use App\Model\LoginAuth;
 use App\Service\LoginAuthService;
 
-session_start();
-
 class LoginHandler implements HandlerInterface
 {
     public function run(array $req): array
