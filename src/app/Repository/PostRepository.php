@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Model\Post;
-use http\QueryString;
 use PDO;
 
 class PostRepository
@@ -22,7 +21,7 @@ class PostRepository
                     FROM article INNER JOIN users ON article.user_id = users.user_id
                         ORDER BY article_id';
 
-        $stmt = $pdo->query($query);
+        $stmt = $pdo->prepare($query);
 
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

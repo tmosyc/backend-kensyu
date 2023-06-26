@@ -10,10 +10,8 @@ class LoginHandler implements HandlerInterface
     public function run(array $req): array
     {
         $login_auth = new LoginAuth(
-            name: null,
             email: $_POST['login_email'],
             password:$_POST['login_password'],
-            check: null
         );
         $user_auth = LoginAuthService::loginAuth($login_auth);
         if ($user_auth->check === true) {

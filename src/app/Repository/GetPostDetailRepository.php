@@ -14,8 +14,6 @@ class GetPostDetailRepository
     public static function selectArticleDetail($id, PDO $pdo = null)
     {
         try {
-
-
             if (is_null($pdo)) {
                 $pdo = DbConnect::dbConnect();
             }

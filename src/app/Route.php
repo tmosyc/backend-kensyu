@@ -85,7 +85,7 @@ class Route
                 return new GetPostDetailHandler($id);
             }
         }
-        if ($method === 'GET' && $path === "/posts/logout") {
+        if ($method === 'GET' && $path === "logout") {
             return new LogoutHandler;
         }
         return new NotFoundHandler;
