@@ -17,6 +17,7 @@ class PostRepository
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
         }
+
         $query = 'SELECT article_id,title,text,name,thumbnail_image_id 
                     FROM article INNER JOIN users ON article.user_id = users.user_id
                         ORDER BY article_id';
