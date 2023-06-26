@@ -21,7 +21,6 @@ class PostUserRegisterRepository
      */
     public static function insertUser($user, $pdo = null)
     {
-
         try {
             if ($pdo === null) {
                 $pdo = DbConnect::dbConnect();

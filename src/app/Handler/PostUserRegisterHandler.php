@@ -7,6 +7,8 @@ namespace App\Handler;
 use App\Service\PostUserRegisterService;
 use App\Model\User;
 
+session_start();
+
 class PostUserRegisterHandler implements HandlerInterface
 {
     /**
@@ -24,6 +26,9 @@ class PostUserRegisterHandler implements HandlerInterface
                 profile_img_name: $_FILES['profile_image']['name'],
                 profile_img_tmp: $_FILES['profile_image']['tmp_name']
             );
+
+            $_SESSION['username'] = $_POST['username'];
+
             PostUserRegisterService::insertUser($user);
         }
 
