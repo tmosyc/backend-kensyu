@@ -25,7 +25,7 @@ class PostArticleRepository
             $pdo -> beginTransaction();
 
             $select_user_id = $pdo->prepare("SELECT user_id FROM users WHERE name=:name");
-            $params = array(':name'=>$_SESSION['username']);
+            $params = array(':name'=>$article->author_name);
             $select_user_id->execute($params);
             $user_id = $select_user_id->fetch(PDO::FETCH_ASSOC)['user_id'];
 

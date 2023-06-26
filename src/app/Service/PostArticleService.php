@@ -10,6 +10,7 @@ class PostArticleService
      * @param $article
      * @property string $title,
      * @property string $content,
+     * @property string $author_name,
      * @property array $image_name,
      * @property array $image_tmp_name,
      * @property ?array $tag_id

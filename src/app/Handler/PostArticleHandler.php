@@ -23,6 +23,7 @@ class PostArticleHandler implements HandlerInterface
             $article = new Article(
                 title: $_POST['title'],
                 content: $_POST['content'],
+                author_name: $_SESSION['username'],
                 image_name: $_FILES['images']['name'],
                 image_tmp_name: $_FILES['images']['tmp_name'],
                 tag_id: $_POST['tags'],
