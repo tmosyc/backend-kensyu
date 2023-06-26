@@ -1,31 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Handler;
+
+use App\Model\LoginAuth;
+use App\Service\LoginAuthService;
+
+session_start();
 
 class LoginHandler implements HandlerInterface
 {
     public function run(array $req): array
     {
-        $result = self::render();
-
-        return [
-            'status_code' => 200,
-            'body' => "<html>{$result}</html>",
-        ];
-    }
-
-    public static function render()
-    {
-        $body = "<body>";
-        $body .= "<form action='/post' method='post'>";
-        $body .= "<input type='email' name='email' placeholder='メールアドレス'>";
-        $body .= "<input type='text' name='password' placeholder='パスワード'>";
-        $body .= "<button type='submit' name='register'>Sign Up</button>";
-        $body .= "</form>";
-        $body .= "</body>";
-
-        return $body;
+        $login_auth = new LoginAuth(
+            name: null,
+            email: $_POST['login_email'],
+            password:$_POST['login_password'],
+            check: null
+        );
+        $user_auth = LoginAuthService::loginAuth($login_auth);
+        if ($user_auth->check === true) {
+            $_SESSION['username'] = $user_auth->name;
+            header("Location:http://localhost/posts",true, 301);
+        } else {
+            header("Location:http://localhost/login", true, 301);
+        }
+        exit();
     }
 }
