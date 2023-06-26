@@ -6,6 +6,7 @@ namespace App\Repository;
 use App\Repository\DbConnect;
 use App\Model\Article;
 use PDO;
+use PDOException;
 
 class PostArticleRepository
 {

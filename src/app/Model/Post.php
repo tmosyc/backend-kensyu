@@ -9,6 +9,8 @@ class Post
      * @param string $title
      * @param string $content
      * @param int $author_id
+     * @param ?int $thumbnail_image_id
+     * @param ?array $image_array
      */
     public function __construct(
         public int $id,
@@ -17,7 +19,6 @@ class Post
         public int $author_id,
         public ?int $thumbnail_image_id,
         public ?array $image_array,
-
     )
     {
     }
