@@ -32,12 +32,8 @@ class Route
     {
         if (strpos($path,'posts/')){
             $id = explode('/', $path)[2];
-            try {
-                $id = (int)$id;
-                $id = (string)$id;
-            } catch (Exception $e) {
-                $id = null;
-                var_dump($e);
+            if (is_int((int) $id)){
+                return new NotFoundHandler();
             }
         }
         if ($method === 'GET' && $path === '/register') {
@@ -85,10 +81,9 @@ class Route
                 return new GetPostDetailHandler($id);
             }
         }
-        if ($method === 'GET' && $path === "logout") {
+        if ($method === 'GET' && $path === "/logout") {
             return new LogoutHandler;
         }
         return new NotFoundHandler;
     }
 }
-
