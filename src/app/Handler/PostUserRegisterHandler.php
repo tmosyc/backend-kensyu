@@ -30,7 +30,7 @@ class PostUserRegisterHandler implements HandlerInterface
             $_SESSION['email'] = $_POST['email'];
         }
 
-        header("Location:http://localhost/posts",true, 301);
+        header("Location:http://localhost/posts",true, 302);
         exit();
     }
 }

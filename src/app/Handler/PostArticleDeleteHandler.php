@@ -18,7 +18,7 @@ class PostArticleDeleteHandler implements HandlerInterface
         $id = (int) $this->id;
         PostArticleDeleteService::deleteArticle($id);
 
-        header("Location:http://localhost/posts",true, 301);
+        header("Location:http://localhost/posts",true, 302);
         exit();
     }
 }
