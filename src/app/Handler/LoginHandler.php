@@ -11,14 +11,18 @@ class LoginHandler implements HandlerInterface
     {
         $login_auth = new LoginAuth(
             email: $_POST['login_email'],
-            password:$_POST['login_password'],
+            password: $_POST['login_password'],
         );
         $user_auth = LoginAuthService::loginAuth($login_auth);
-        if ($user_auth->check === true) {
-            $_SESSION['username'] = $user_auth->name;
-            header("Location:http://localhost/posts",true, 301);
+        if ($user_auth != null) {
+            if ($user_auth->check === true) {
+                $_SESSION['username'] = $user_auth->name;
+                header("Location:http://localhost/posts", true, 302);
+            } else {
+                header("Location:http://localhost/login", true, 302);
+            }
         } else {
-            header("Location:http://localhost/login", true, 301);
+            header("Location:http://localhost/login", true, 302);
         }
         exit();
     }

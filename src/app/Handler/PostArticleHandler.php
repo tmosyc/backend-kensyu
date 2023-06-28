@@ -61,7 +61,7 @@ class PostArticleHandler implements HandlerInterface
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
         $body .= "<button onclick='location.href=\"/login\"'>ログイン</button>";
-        $body .= "<button onclick='location.href=\"/posts/logout\"'>ログアウト</button>";
+        $body .= "<button onclick='location.href=\"/logout\"'>ログアウト</button>";
         $body .= "<p>{$login_text}</p>";
         $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";

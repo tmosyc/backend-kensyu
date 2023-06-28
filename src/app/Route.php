@@ -48,11 +48,11 @@ class Route
         if ($method === 'POST' && $path === '/login') {
             return new LoginHandler();
         }
+        if ($method === 'GET' && $path === "/logout") {
+            return new LogoutHandler;
+        }
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;
-        }
-        if ($method === 'GET' && $path === "/posts/{$id}") {
-            return new GetPostDetailHandler($id);
         }
         if ($method === 'POST' && $path === "/posts") {
             if (isset($_SESSION['username'])) {
@@ -61,28 +61,30 @@ class Route
                 return new GetPostListHandler;
             }
         }
-        if ($method === 'GET' && $path === "/posts/{$id}/update") {
-            if (isset($_SESSION['username'])) {
-                return new PostUpdateArticleViewHandler($id);
-            } else {
+        if (isset($id)) {
+            if ($method === 'GET' && $path === "/posts/{$id}") {
                 return new GetPostDetailHandler($id);
             }
-        }
-        if ($method === 'POST' && $_POST['_method'] === 'PUT' && $path === "/posts/{$id}") {
-            return new PutUpdateArticleHandler($id);
-        }
-        if ($method === 'POST' && $path === "/posts/{$id}") {
-            return new GetPostDetailHandler($id);
-        }
-        if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete") {
-            if (isset($_SESSION['username'])) {
-                return new PostArticleDeleteHandler($id);
-            } else {
+            if ($method === 'GET' && $path === "/posts/{$id}/update") {
+                if (isset($_SESSION['username'])) {
+                    return new PostUpdateArticleViewHandler($id);
+                } else {
+                    return new GetPostDetailHandler($id);
+                }
+            }
+            if ($method === 'POST' && $_POST['_method'] === 'PUT' && $path === "/posts/{$id}") {
+                return new PutUpdateArticleHandler($id);
+            }
+            if ($method === 'POST' && $path === "/posts/{$id}") {
                 return new GetPostDetailHandler($id);
             }
-        }
-        if ($method === 'GET' && $path === "/logout") {
-            return new LogoutHandler;
+            if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete") {
+                if (isset($_SESSION['username'])) { //&& $_SESSION['username'] ===
+                    return new PostArticleDeleteHandler($id);
+                } else {
+                    return new GetPostDetailHandler($id);
+                }
+            }
         }
         return new NotFoundHandler;
     }

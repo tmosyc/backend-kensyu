@@ -9,7 +9,7 @@ class LogoutHandler implements HandlerInterface
     {
         $_SESSION = [];
         session_destroy();
-        header("Location:http://localhost/posts",true, 301);
+        header("Location:http://localhost/posts",true, 302);
         exit();
     }
 }

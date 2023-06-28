@@ -19,8 +19,10 @@ class LoginAuthRepository
                 name:$row['name'],
                 email:$row['mail_address'],
                 password: $row['password'],
-                check: null
             );
+        }
+        if (empty($login_check)){
+            $login_check = null;
         }
         return $login_check;
     }

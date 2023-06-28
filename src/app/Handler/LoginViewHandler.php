@@ -25,7 +25,6 @@ class LoginViewHandler implements HandlerInterface
         $body .= "<button type='submit' name='register'>Login</button>";
         $body .= "</form>";
         $body .= "</body>";
-
         return $body;
     }
 }
