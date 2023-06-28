@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Handler;
@@ -10,6 +9,7 @@ use App\Service\PostArticleService;
 use App\Service\PostUserRegisterService;
 use App\Service\TagsListService;
 use App\Model\User;
+
 class GetPostListHandler implements HandlerInterface
 {
     /**
@@ -32,9 +32,17 @@ class GetPostListHandler implements HandlerInterface
      */
     private static function render(array $posts, $tags): string
     {
+        if (isset($_SESSION['username'])){
+            $login_text = "{$_SESSION['username']}さんがログインしています";
+        } else {
+            $login_text = "ログインしていません";
+        }
         $img_path = "../../images/article";
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
+        $body .= "<button onclick='location.href=\"/login\"'>ログイン</button>";
+        $body .= "<button onclick='location.href=\"/logout\"'>ログアウト</button>";
+        $body .= "<p>{$login_text}</p>";
         $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
@@ -59,6 +67,7 @@ class GetPostListHandler implements HandlerInterface
                     $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.png' width='300' height='200'>";
                 }
             }
+            $body .= "<p>投稿者：$post->author_name</p>";
             $body .= "<br>";
         }
         $body .= "</body>";

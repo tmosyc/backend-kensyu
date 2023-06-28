@@ -8,7 +8,7 @@ class Post
      * @param int $id
      * @param string $title
      * @param string $content
-     * @param int $author_id
+     * @param string $author_name
      * @param ?int $thumbnail_image_id
      * @param ?array $image_array
      */
@@ -16,7 +16,7 @@ class Post
         public int $id,
         public string $title,
         public string $content,
-        public int $author_id,
+        public string $author_name,
         public ?int $thumbnail_image_id,
         public ?array $image_array,
     )

@@ -23,6 +23,7 @@ class PostArticleHandler implements HandlerInterface
             $article = new Article(
                 title: $_POST['title'],
                 content: $_POST['content'],
+                author_name: $_SESSION['username'],
                 image_name: $_FILES['images']['name'],
                 image_tmp_name: $_FILES['images']['tmp_name'],
                 tag_id: $_POST['tags'],
@@ -45,6 +46,13 @@ class PostArticleHandler implements HandlerInterface
      */
     private static function render(array $posts, $tags): string
     {
+        if (isset($_SESSION['username'])){
+            $login_text = "{$_SESSION['username']}さんがログインしています";
+        } else {
+            $login_text = "ログインしていません";
+        }
+
+
         $validation_text="";
         if (empty($_POST['title']) || empty($_POST['content'])){
             $validation_text = '文字を入れてください';
@@ -52,6 +60,9 @@ class PostArticleHandler implements HandlerInterface
         $img_path = "../../images/article";
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
+        $body .= "<button onclick='location.href=\"/login\"'>ログイン</button>";
+        $body .= "<button onclick='location.href=\"/logout\"'>ログアウト</button>";
+        $body .= "<p>{$login_text}</p>";
         $body .= "<form action='/posts' method='post' enctype='multipart/form-data'>";
         $body .= "<input type='text' name='title' size=25 placeholder='タイトルを入力してください'> ";
         $body .= "<input type='text' name='content' size=30 placeholder='内容を入力してください'> ";
@@ -77,7 +88,7 @@ class PostArticleHandler implements HandlerInterface
                     $body .= "<img src='{$img_path}/{$post->id}/{$post->thumbnail_image_id}.png' width='300' height='200'>";
                 }
             }
-            $body .= "<br>";
+            $body .= "<p>投稿者：$post->author_name</p>";
             $body .= "<br>";
         }
         $body .= "</body>";
