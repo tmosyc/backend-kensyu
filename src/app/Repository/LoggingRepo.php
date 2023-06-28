@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Repository\DbConnect;
+use PDO;
 
 class LoggingRepo
 {
@@ -11,10 +12,13 @@ class LoggingRepo
         if (is_null($pdo)){
             $pdo = DbConnect::dbConnect();
         }
-        $stmt = $pdo -> prepare('SELECT name FROM users WHERE mail_address = :email');
-        $params = array(':email' => $email->email);
+        $stmt = $pdo -> prepare('SELECT name, mail_address FROM users WHERE mail_address = :email');
+        $params = array(':email' => $email);
         $stmt ->execute($params);
-        $usename = $stmt -> fetch(\PDO::FETCH_ASSOC)['name'];
-        return $usename;
+        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+        if ($row !== false) {
+            $username = $row['name'];
+        }
+        return $username;
     }
 }

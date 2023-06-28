@@ -17,6 +17,7 @@ class LoginHandler implements HandlerInterface
         if ($user_auth != null) {
             if ($user_auth->check === true) {
                 $_SESSION['username'] = $user_auth->name;
+                $_SESSION['email'] = $user_auth->email;
                 header("Location:http://localhost/posts", true, 302);
             } else {
                 header("Location:http://localhost/login", true, 302);

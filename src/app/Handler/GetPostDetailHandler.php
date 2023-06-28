@@ -27,6 +27,7 @@ class GetPostDetailHandler implements HandlerInterface
 
     private static function render($post, $logging_name): string
     {
+        var_dump($logging_name);
         $img_path = "../../images/article";
         $title=htmlspecialchars($post->title,ENT_QUOTES);
         $content=htmlspecialchars($post->content,ENT_QUOTES);
@@ -43,7 +44,6 @@ class GetPostDetailHandler implements HandlerInterface
             }
         }
         $body .= "<br>";
-        $body .= "<button onclick='location.href=\"/posts/{$post->id}/update\"'>update</button>";
         $body .= "<form action='/posts/{$post->id}/update' method='post'>";
         $body .= "<input type='hidden' name='username' value={$logging_name}>";
         $body .= "<button type='submit'>update</button>";

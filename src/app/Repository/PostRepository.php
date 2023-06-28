@@ -22,6 +22,7 @@ class PostRepository
                         ORDER BY article_id';
 
         $stmt = $pdo->prepare($query);
+        $stmt ->execute();
 
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

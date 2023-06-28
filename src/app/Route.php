@@ -30,11 +30,10 @@ class Route
      */
     public static function getHandler(string $method, string $path,): HandlerInterface
     {
+        var_dump($_POST['username']);
+        var_dump($_SESSION['username']);
         if (strpos($path,'posts/')){
             $id = explode('/', $path)[2];
-            if (is_int((int) $id)){
-                return new NotFoundHandler();
-            }
         }
         if ($method === 'GET' && $path === '/register') {
             return new PostUserRegisterViewHandler();
@@ -65,7 +64,7 @@ class Route
             if ($method === 'GET' && $path === "/posts/{$id}") {
                 return new GetPostDetailHandler($id);
             }
-            if ($method === 'GET' && $path === "/posts/{$id}/update") {
+            if ($method === 'POST' && $path === "/posts/{$id}/update") {
                 if ($_SESSION['username']===$_POST['username']) {
                     return new PostUpdateArticleViewHandler($id);
                 } else {
