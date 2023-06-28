@@ -27,6 +27,7 @@ class PostUserRegisterHandler implements HandlerInterface
             PostUserRegisterService::insertUser($user);
 
             $_SESSION['username'] = $_POST['username'];
+            $_SESSION['email'] = $_POST['email'];
         }
 
         header("Location:http://localhost/posts",true, 301);

@@ -4,6 +4,7 @@ namespace App\Handler;
 use App\Model\Post;
 use App\Model\UpdateArticle;
 use App\Service\GetPostDetailService;
+use App\Service\LoggingService;
 use App\Service\PostUpdateArticleService;
 
 class GetPostDetailHandler implements HandlerInterface
@@ -16,7 +17,7 @@ class GetPostDetailHandler implements HandlerInterface
 
     public function run(array $req): array
     {
-        $result = self::render(GetPostDetailService::getPostArticleDetail($this->id));
+        $result = self::render(GetPostDetailService::getPostArticleDetail($this->id), LoggingService::logging($_SESSION['email']));
 
         return [
             'status_code' => 200,
@@ -24,7 +25,7 @@ class GetPostDetailHandler implements HandlerInterface
         ];
     }
 
-    private static function render($post): string
+    private static function render($post, $logging_name): string
     {
         $img_path = "../../images/article";
         $title=htmlspecialchars($post->title,ENT_QUOTES);
@@ -43,8 +44,13 @@ class GetPostDetailHandler implements HandlerInterface
         }
         $body .= "<br>";
         $body .= "<button onclick='location.href=\"/posts/{$post->id}/update\"'>update</button>";
+        $body .= "<form action='/posts/{$post->id}/update' method='post'>";
+        $body .= "<input type='hidden' name='username' value={$logging_name}>";
+        $body .= "<button type='submit'>update</button>";
+        $body .= "</form>";
         $body .= "<form action='/posts/{$post->id}/delete' method='post'>";
         $body .= "<input type='hidden' name='_method' value='DELETE'>";
+        $body .= "<input type='hidden' name='username' value={$logging_name}>";
         $body .= "<button type='submit'>delete</button>";
         $body .= "</form>";
         $body .="</body>";

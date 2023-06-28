@@ -66,7 +66,7 @@ class Route
                 return new GetPostDetailHandler($id);
             }
             if ($method === 'GET' && $path === "/posts/{$id}/update") {
-                if (isset($_SESSION['username'])) {
+                if ($_SESSION['username']===$_POST['username']) {
                     return new PostUpdateArticleViewHandler($id);
                 } else {
                     return new GetPostDetailHandler($id);
@@ -79,7 +79,7 @@ class Route
                 return new GetPostDetailHandler($id);
             }
             if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete") {
-                if (isset($_SESSION['username'])) { //&& $_SESSION['username'] ===
+                if ($_SESSION['username']===$_POST['username']) {
                     return new PostArticleDeleteHandler($id);
                 } else {
                     return new GetPostDetailHandler($id);
