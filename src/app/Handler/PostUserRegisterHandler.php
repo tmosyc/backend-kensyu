@@ -25,9 +25,6 @@ class PostUserRegisterHandler implements HandlerInterface
                 profile_img_tmp: $_FILES['profile_image']['tmp_name']
             );
             PostUserRegisterService::insertUser($user);
-
-            $_SESSION['username'] = $_POST['username'];
-            $_SESSION['email'] = $_POST['email'];
         }
 
         header("Location:http://localhost/posts",true, 301);

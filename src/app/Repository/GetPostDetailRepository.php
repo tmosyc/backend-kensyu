@@ -14,15 +14,13 @@ class GetPostDetailRepository
     public static function selectArticleDetail($id, PDO $pdo = null)
     {
         try {
+
+
             if (is_null($pdo)) {
                 $pdo = DbConnect::dbConnect();
             }
             $pdo->beginTransaction();
-
-            $query = 'SELECT article_id, title, text, name, thumbnail_image_id 
-                        FROM article INNER JOIN users ON article.user_id = users.user_id 
-                        WHERE article_id = :id';
-            $select_article = $pdo->prepare($query);
+            $select_article = $pdo->prepare("SELECT article_id, title, text, user_id, thumbnail_image_id FROM article WHERE article_id = :id");
             $select_article->bindParam(':id', $id, PDO::PARAM_INT);
             $select_article->execute();
             $results = $select_article->fetch(PDO::FETCH_ASSOC);
@@ -39,7 +37,7 @@ class GetPostDetailRepository
                 id: $results['article_id'],
                 title: $results['title'],
                 content: $results['text'],
-                author_name: $results['name'],
+                author_id: $results['user_id'],
                 thumbnail_image_id: $results['thumbnail_image_id'],
                 image_array: $image_array
             );

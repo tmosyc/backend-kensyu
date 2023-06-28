@@ -21,6 +21,7 @@ class PostUserRegisterRepository
      */
     public static function insertUser($user, $pdo = null)
     {
+
         try {
             if ($pdo === null) {
                 $pdo = DbConnect::dbConnect();
@@ -28,7 +29,7 @@ class PostUserRegisterRepository
 
             $pdo -> beginTransaction();
 
-            $insert_user = $pdo->prepare('INSERT INTO users (name,password,mail_address,profile_image_id) VALUES (:username, :password, :email ,null) RETURNING user_id');
+            $insert_user = $pdo->prepare('INSERT INTO users (name,password,mail_address,profile_image_id) VALUES (:username, :email, :password,null) RETURNING user_id');
             $params = array(':username' => $user->username, ':email' => $user->email, ':password' => $user->password);
             $insert_user->execute($params);
             $user_last_id = $insert_user->fetch(PDO::FETCH_ASSOC)['user_id'];

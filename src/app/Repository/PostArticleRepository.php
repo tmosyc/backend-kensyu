@@ -24,13 +24,8 @@ class PostArticleRepository
 
             $pdo -> beginTransaction();
 
-            $select_user_id = $pdo->prepare("SELECT user_id FROM users WHERE name=:name");
-            $params = array(':name'=>$article->author_name);
-            $select_user_id->execute($params);
-            $user_id = $select_user_id->fetch(PDO::FETCH_ASSOC)['user_id'];
-
-            $article_insert = $pdo->prepare("INSERT INTO article(user_id,title,text,thumbnail_image_id) VALUES (:user_id, :title,:content,:thumbnail_id) RETURNING article_id");
-            $params = array('user_id'=>$user_id,':title' => $article->title, ':content' => $article->content, 'thumbnail_id'=>$thumbnail_id);
+            $article_insert = $pdo->prepare("INSERT INTO article(user_id,title,text,thumbnail_image_id) VALUES (1, :title,:content,$thumbnail_id) RETURNING article_id");
+            $params = array(':title' => $article->title, ':content' => $article->content);
             $article_insert->execute($params);
             $article_id = $article_insert->fetch(PDO::FETCH_ASSOC)['article_id'];
             $i=0;

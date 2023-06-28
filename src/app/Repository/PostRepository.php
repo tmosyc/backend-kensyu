@@ -16,21 +16,14 @@ class PostRepository
         if (is_null($pdo)) {
             $pdo = DbConnect::dbConnect();
         }
-
-        $query = 'SELECT article_id,title,text,name,thumbnail_image_id 
-                    FROM article INNER JOIN users ON article.user_id = users.user_id
-                        ORDER BY article_id';
-
-        $stmt = $pdo->prepare($query);
-        $stmt ->execute();
-
+        $stmt = $pdo->query('SELECT article_id,title,text,user_id,thumbnail_image_id FROM article ORDER BY article_id');
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $post = new Post(
                 id: $row['article_id'],
                 title: $row['title'],
                 content: $row['text'],
-                author_name: $row['name'],
+                author_id: $row['user_id'],
                 thumbnail_image_id:$row['thumbnail_image_id'],
                 image_array:null
             );

@@ -4,22 +4,16 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Handler\GetPostDetailHandler;
-use App\Handler\GetPostListHandler;
 use App\Handler\HandlerInterface;
-use App\Handler\LoginHandler;
-use App\Handler\LoginViewHandler;
-use App\Handler\LogoutHandler;
+use App\Handler\GetPostListHandler;
+use App\Handler\GetPostDetailHandler;
 use App\Handler\NotFoundHandler;
-use App\Handler\PostArticleDeleteHandler;
 use App\Handler\PostArticleHandler;
 use App\Handler\PostUpdateArticleViewHandler;
-use App\Handler\PostUserRegisterHandler;
 use App\Handler\PostUserRegisterViewHandler;
 use App\Handler\PutUpdateArticleHandler;
-use Exception;
-
-session_start();
+use App\Handler\PostArticleDeleteHandler;
+use App\Handler\PostUserRegisterHandler;
 
 class Route
 {
@@ -30,60 +24,35 @@ class Route
      */
     public static function getHandler(string $method, string $path,): HandlerInterface
     {
-        var_dump($_POST['username']);
-        var_dump($_SESSION['username']);
         if (strpos($path,'posts/')){
             $id = explode('/', $path)[2];
         }
-        if ($method === 'GET' && $path === '/register') {
+        if ($method=== 'GET' && $path === '/register') {
             return new PostUserRegisterViewHandler();
         }
-        if ($method === 'POST' && $path === '/register') {
+        if ($method=== 'POST' && $path === '/register') {
             return new PostUserRegisterHandler();
-        }
-        if ($method === 'GET' && $path === '/login') {
-            return new LoginViewHandler();
-        }
-        if ($method === 'POST' && $path === '/login') {
-            return new LoginHandler();
-        }
-        if ($method === 'GET' && $path === "/logout") {
-            return new LogoutHandler;
         }
         if ($method === 'GET' && $path === '/posts') {
             return new GetPostListHandler;
         }
-        if ($method === 'POST' && $path === "/posts") {
-            if (isset($_SESSION['username'])) {
-                return new PostArticleHandler;
-            } else {
-                return new GetPostListHandler;
-            }
+        if ($method === 'GET' && $path === "/posts/{$id}") {
+            return new GetPostDetailHandler($id);
         }
-        if (isset($id)) {
-            if ($method === 'GET' && $path === "/posts/{$id}") {
-                return new GetPostDetailHandler($id);
-            }
-            if ($method === 'POST' && $path === "/posts/{$id}/update") {
-                if ($_SESSION['username']===$_POST['username']) {
-                    return new PostUpdateArticleViewHandler($id);
-                } else {
-                    return new GetPostDetailHandler($id);
-                }
-            }
-            if ($method === 'POST' && $_POST['_method'] === 'PUT' && $path === "/posts/{$id}") {
-                return new PutUpdateArticleHandler($id);
-            }
-            if ($method === 'POST' && $path === "/posts/{$id}") {
-                return new GetPostDetailHandler($id);
-            }
-            if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete") {
-                if ($_SESSION['username']===$_POST['username']) {
-                    return new PostArticleDeleteHandler($id);
-                } else {
-                    return new GetPostDetailHandler($id);
-                }
-            }
+        if ($method === 'POST' && $path === "/posts") {
+            return new PostArticleHandler;
+        }
+        if ($method === 'GET' && $path === "/posts/{$id}/update"){
+            return new PostUpdateArticleViewHandler($id);
+        }
+        if ($method === 'POST' && $_POST['_method'] === 'PUT' && $path === "/posts/{$id}"){
+            return new PutUpdateArticleHandler($id);
+        }
+        if ($method === 'POST' && $path === "/posts/{$id}") {
+            return new GetPostDetailHandler($id);
+        }
+        if ($method === 'POST' && $_POST['_method'] === 'DELETE' && $path === "/posts/{$id}/delete"){
+            return new PostArticleDeleteHandler($id);
         }
         return new NotFoundHandler;
     }
