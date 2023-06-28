@@ -32,11 +32,14 @@ class GetPostListHandler implements HandlerInterface
      */
     private static function render(array $posts, $tags): string
     {
+
         if (isset($_SESSION['username'])){
             $login_text = "{$_SESSION['username']}さんがログインしています";
         } else {
             $login_text = "ログインしていません";
         }
+        $_SESSION['token'] = bin2hex(random_bytes(35));
+
         $img_path = "../../images/article";
         $body = "<body>";
         $body .= "<h1>記事一覧</h1>";
@@ -52,6 +55,7 @@ class GetPostListHandler implements HandlerInterface
             $body .= "<option value={$tag->tag_id}>{$tag->tagname}</option>";
         }
         $body .= "</select>";
+        $body .= "<input type='hidden' name='token' value={$_SESSION['token']}>";
         $body .= "<h5 class='image-attribute'></h5>";
         $body .= "<button type='submit' name='content_post'>submit</button> ";
         $body .= "</form>";

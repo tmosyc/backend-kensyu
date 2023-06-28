@@ -19,6 +19,13 @@ class PostArticleHandler implements HandlerInterface
      */
     public function run(array $req): array
     {
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+
+        if (!$token || $token !== $_SESSION['token']){
+            header("Location:http://localhost/posts",true, 302);
+            exit();
+        }
+
         if (strlen($_POST['title']) >= 1 && strlen($_POST['content']) >= 1 ) {
             $article = new Article(
                 title: $_POST['title'],
